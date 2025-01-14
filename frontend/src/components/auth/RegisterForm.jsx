@@ -59,11 +59,21 @@ function RegisterForm() {
         alignItems: 'center',
         justifyContent: 'center',
         bgcolor: 'background.default',
+        padding: 2,
       }}
     >
-      <Card sx={{ maxWidth: 400, width: '100%', mx: 2 }}>
+      <Card
+        sx={{
+          maxWidth: 450,
+          width: '100%',
+          mx: 2,
+          borderRadius: 2,
+          boxShadow: 3,
+          backgroundColor: 'white',
+        }}
+      >
         <CardContent sx={{ p: 4 }}>
-          <Typography variant="h5" component="h1" gutterBottom textAlign="center">
+          <Typography variant="h5" component="h1" gutterBottom textAlign="center" color="primary">
             Create Account
           </Typography>
           {error && (
@@ -80,6 +90,8 @@ function RegisterForm() {
               value={formData.name}
               onChange={handleChange}
               required
+              variant="outlined"
+              sx={{ borderRadius: 1 }}
             />
             <TextField
               name="email"
@@ -90,6 +102,8 @@ function RegisterForm() {
               value={formData.email}
               onChange={handleChange}
               required
+              variant="outlined"
+              sx={{ borderRadius: 1 }}
             />
             <TextField
               name="password"
@@ -100,6 +114,8 @@ function RegisterForm() {
               value={formData.password}
               onChange={handleChange}
               required
+              variant="outlined"
+              sx={{ borderRadius: 1 }}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
@@ -122,20 +138,27 @@ function RegisterForm() {
               value={formData.confirmPassword}
               onChange={handleChange}
               required
+              variant="outlined"
+              sx={{ borderRadius: 1 }}
             />
             <Button
               type="submit"
               variant="contained"
               fullWidth
               size="large"
-              sx={{ mt: 3 }}
+              sx={{
+                mt: 3,
+                borderRadius: 1,
+                backgroundColor: 'primary.main',
+                '&:hover': { backgroundColor: 'primary.dark' },
+              }}
             >
               Register
             </Button>
           </form>
-          <Typography textAlign="center" sx={{ mt: 2 }}>
+          <Typography textAlign="center" sx={{ mt: 2 }} color="text.secondary">
             Already have an account?{' '}
-            <Link to="/login" style={{ color: 'primary.main' }}>
+            <Link to="/login" style={{ color: '#1976d2', textDecoration: 'none' }}>
               Login here
             </Link>
           </Typography>
@@ -145,4 +168,4 @@ function RegisterForm() {
   );
 }
 
-export default RegisterForm; 
+export default RegisterForm;

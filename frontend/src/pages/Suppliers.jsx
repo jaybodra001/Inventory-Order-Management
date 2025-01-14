@@ -9,6 +9,8 @@ import {
   Link,
   Stack,
   Alert,
+  Card,
+  CardContent,
 } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import { toast } from 'react-toastify';
@@ -145,14 +147,14 @@ function Suppliers() {
             justifyContent="space-between" 
             alignItems="center"
           >
-            <Typography variant="h5" component="h1">
+            <Typography variant="h4" component="h1" fontWeight="bold">
               Supplier Management
             </Typography>
             <Button
               variant="contained"
               startIcon={<AddIcon />}
               onClick={() => setOpenForm(true)}
-              sx={{ borderRadius: 2 }}
+              sx={{ borderRadius: 2, padding: '8px 16px' }}
             >
               Add Supplier
             </Button>
@@ -160,15 +162,19 @@ function Suppliers() {
         </Box>
 
         {suppliers.length === 0 ? (
-          <Alert severity="info">
+          <Alert severity="info" sx={{ borderRadius: 2, boxShadow: 1 }}>
             No suppliers found. Add your first supplier to get started.
           </Alert>
         ) : (
-          <SupplierList
-            suppliers={suppliers}
-            onEdit={handleEdit}
-            onDelete={(id) => setDeleteDialog({ open: true, id })}
-          />
+          <Card sx={{ borderRadius: 2, boxShadow: 2 }}>
+            <CardContent>
+              <SupplierList
+                suppliers={suppliers}
+                onEdit={handleEdit}
+                onDelete={(id) => setDeleteDialog({ open: true, id })}
+              />
+            </CardContent>
+          </Card>
         )}
 
         <SupplierForm
@@ -193,4 +199,4 @@ function Suppliers() {
   );
 }
 
-export default Suppliers; 
+export default Suppliers;

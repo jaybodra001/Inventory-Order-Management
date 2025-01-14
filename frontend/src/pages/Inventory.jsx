@@ -5,6 +5,9 @@ import {
   Typography,
   Container,
   Paper,
+  Grid,
+  Card,
+  CardContent,
 } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import { toast } from 'react-toastify';
@@ -49,7 +52,6 @@ function Inventory() {
       if (selectedItem) {
         const response = await inventoryApi.update(selectedItem._id, formData);
         updatedItem = response.data;
-        // Update the items array immediately
         setItems(prevItems => 
           prevItems.map(item => 
             item._id === selectedItem._id ? updatedItem : item
@@ -59,7 +61,6 @@ function Inventory() {
       } else {
         const response = await inventoryApi.create(formData);
         updatedItem = response.data;
-        // Add the new item to the items array immediately
         setItems(prevItems => [...prevItems, updatedItem]);
         toast.success('Item added successfully');
       }
@@ -78,7 +79,6 @@ function Inventory() {
   const handleDelete = async () => {
     try {
       await inventoryApi.delete(deleteDialog.id);
-      // Remove the item from the items array immediately
       setItems(prevItems => 
         prevItems.filter(item => item._id !== deleteDialog.id)
       );
@@ -87,15 +87,15 @@ function Inventory() {
     } catch (error) {
       toast.error('Error deleting item');
     }
-  };
+  };  
 
   if (loading) return <LoadingSpinner />;
 
   return (
     <Container maxWidth="lg" sx={{ py: 4 }}>
-      <Paper sx={{ p: 3 }}>
+      <Paper sx={{ p: 4, boxShadow: 3, borderRadius: 2 }}>
         <Box display="flex" justifyContent="space-between" alignItems="center" mb={3}>
-          <Typography variant="h5" component="h1">
+          <Typography variant="h5" component="h1" fontWeight="bold">
             Inventory Management
           </Typography>
           <Box display="flex" gap={2}>
@@ -104,18 +104,29 @@ function Inventory() {
               variant="contained"
               startIcon={<AddIcon />}
               onClick={() => setOpenForm(true)}
+              sx={{ borderRadius: 2, padding: '8px 16px' }}
             >
               Add Item
             </Button>
           </Box>
         </Box>
 
-        <InventoryList
-          items={items}
-          onEdit={handleEdit}
-          onDelete={(id) => setDeleteDialog({ open: true, id })}
-        />
+        {/* Inventory List Section */}
+        <Grid container spacing={3}>
+          <Grid item xs={12}>
+            <Card sx={{ borderRadius: 2, boxShadow: 2 }}>
+              <CardContent>
+                <InventoryList
+                  items={items}
+                  onEdit={handleEdit}
+                  onDelete={(id) => setDeleteDialog({ open: true, id })}
+                />
+              </CardContent>
+            </Card>
+          </Grid>
+        </Grid>
 
+        {/* Inventory Form Dialog */}
         <InventoryForm
           open={openForm}
           onClose={() => {
@@ -127,6 +138,7 @@ function Inventory() {
           suppliers={suppliers}
         />
 
+        {/* Confirm Delete Dialog */}
         <ConfirmDialog
           open={deleteDialog.open}
           onClose={() => setDeleteDialog({ open: false, id: null })}
@@ -139,4 +151,4 @@ function Inventory() {
   );
 }
 
-export default Inventory; 
+export default Inventory;

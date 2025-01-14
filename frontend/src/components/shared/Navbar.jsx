@@ -17,8 +17,8 @@ function Navbar() {
     <AppBar position="static">
       <Toolbar>
         <InventoryIcon sx={{ mr: 2 }} />
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          Inventory Management
+        <Typography component="div" sx={{ flexGrow: 1 }}>
+          <img src="http://www.myinventoryonline.net/images/logo-big.png" width={180} alt="" />
         </Typography>
         <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
           <Button color="inherit" component={Link} to="/">
@@ -27,7 +27,7 @@ function Navbar() {
           <Button color="inherit" component={Link} to="/inventory">
             Inventory
           </Button>
-          <Button color="inherit" component={Link} to="/suppliers">
+          <Button color="inherit"  component={Link} to="/suppliers">
             Suppliers
           </Button>
           <Typography variant="body2" sx={{ mx: 2 }}>
