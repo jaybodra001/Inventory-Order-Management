@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from "react";
 import {
   Box,
   Card,
@@ -9,20 +9,20 @@ import {
   Alert,
   InputAdornment,
   IconButton,
-} from '@mui/material';
-import { Visibility, VisibilityOff } from '@mui/icons-material';
-import { useNavigate, Link } from 'react-router-dom';
-import { useAuth } from '../../contexts/AuthContext';
+} from "@mui/material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { useNavigate, Link } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContext";
 
 function RegisterForm() {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
   });
   const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const navigate = useNavigate();
   const { register } = useAuth();
 
@@ -35,17 +35,17 @@ function RegisterForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
+    setError("");
 
     if (formData.password !== formData.confirmPassword) {
-      setError('Passwords do not match');
+      setError("Passwords do not match");
       return;
     }
 
     try {
       const { confirmPassword, ...registrationData } = formData;
       await register(registrationData);
-      navigate('/');
+      navigate("/");
     } catch (error) {
       setError(error.message);
     }
@@ -54,26 +54,32 @@ function RegisterForm() {
   return (
     <Box
       sx={{
-        minHeight: '100vh',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        bgcolor: 'background.default',
+        minHeight: "100vh",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        bgcolor: "background.default",
         padding: 2,
       }}
     >
       <Card
         sx={{
           maxWidth: 450,
-          width: '100%',
+          width: "100%",
           mx: 2,
           borderRadius: 2,
           boxShadow: 3,
-          backgroundColor: 'white',
+          backgroundColor: "white",
         }}
       >
         <CardContent sx={{ p: 4 }}>
-          <Typography variant="h5" component="h1" gutterBottom textAlign="center" color="primary">
+          <Typography
+            variant="h5"
+            component="h1"
+            gutterBottom
+            textAlign="center"
+            color="primary"
+          >
             Create Account
           </Typography>
           {error && (
@@ -108,7 +114,7 @@ function RegisterForm() {
             <TextField
               name="password"
               label="Password"
-              type={showPassword ? 'text' : 'password'}
+              type={showPassword ? "text" : "password"}
               fullWidth
               margin="normal"
               value={formData.password}
@@ -132,7 +138,7 @@ function RegisterForm() {
             <TextField
               name="confirmPassword"
               label="Confirm Password"
-              type={showPassword ? 'text' : 'password'}
+              type={showPassword ? "text" : "password"}
               fullWidth
               margin="normal"
               value={formData.confirmPassword}
@@ -149,16 +155,19 @@ function RegisterForm() {
               sx={{
                 mt: 3,
                 borderRadius: 1,
-                backgroundColor: 'primary.main',
-                '&:hover': { backgroundColor: 'primary.dark' },
+                backgroundColor: "primary.main",
+                "&:hover": { backgroundColor: "primary.dark" },
               }}
             >
               Register
             </Button>
           </form>
           <Typography textAlign="center" sx={{ mt: 2 }} color="text.secondary">
-            Already have an account?{' '}
-            <Link to="/login" style={{ color: '#1976d2', textDecoration: 'none' }}>
+            Already have an account?{" "}
+            <Link
+              to="/login"
+              style={{ color: "#1976d2", textDecoration: "none" }}
+            >
               Login here
             </Link>
           </Typography>

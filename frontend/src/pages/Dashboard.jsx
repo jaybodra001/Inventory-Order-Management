@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 import {
   Box,
   Container,
@@ -12,15 +12,15 @@ import {
   ListItemText,
   ListItemIcon,
   Divider,
-} from '@mui/material';
+} from "@mui/material";
 import {
   Warning,
   Inventory as InventoryIcon,
   People as PeopleIcon,
   TrendingDown,
-} from '@mui/icons-material';
-import { inventoryApi, supplierApi } from '../services/api';
-import LoadingSpinner from '../components/shared/LoadingSpinner';
+} from "@mui/icons-material";
+import { inventoryApi, supplierApi } from "../services/api";
+import LoadingSpinner from "../components/shared/LoadingSpinner";
 
 function Dashboard() {
   const [stats, setStats] = useState({
@@ -36,7 +36,7 @@ function Dashboard() {
 
   const loadDashboardData = async () => {
     try {
-      const [inventory, suppliers] = await Promise.all([ 
+      const [inventory, suppliers] = await Promise.all([
         inventoryApi.getAll(),
         supplierApi.getAll(),
       ]);
@@ -51,7 +51,7 @@ function Dashboard() {
         totalSuppliers: suppliers.data.length,
       });
     } catch (error) {
-      console.error('Error loading dashboard data:', error);
+      console.error("Error loading dashboard data:", error);
     } finally {
       setLoading(false);
     }
@@ -71,7 +71,9 @@ function Dashboard() {
           <Card sx={{ borderRadius: 2, boxShadow: 3 }}>
             <CardContent>
               <Box display="flex" alignItems="center">
-                <InventoryIcon sx={{ fontSize: 40, color: 'primary.main', mr: 2 }} />
+                <InventoryIcon
+                  sx={{ fontSize: 40, color: "primary.main", mr: 2 }}
+                />
                 <Box>
                   <Typography color="textSecondary" gutterBottom>
                     Total Items
@@ -89,7 +91,7 @@ function Dashboard() {
           <Card sx={{ borderRadius: 2, boxShadow: 3 }}>
             <CardContent>
               <Box display="flex" alignItems="center">
-                <Warning sx={{ fontSize: 40, color: 'error.main', mr: 2 }} />
+                <Warning sx={{ fontSize: 40, color: "error.main", mr: 2 }} />
                 <Box>
                   <Typography color="textSecondary" gutterBottom>
                     Low Stock Items
@@ -107,7 +109,9 @@ function Dashboard() {
           <Card sx={{ borderRadius: 2, boxShadow: 3 }}>
             <CardContent>
               <Box display="flex" alignItems="center">
-                <PeopleIcon sx={{ fontSize: 40, color: 'success.main', mr: 2 }} />
+                <PeopleIcon
+                  sx={{ fontSize: 40, color: "success.main", mr: 2 }}
+                />
                 <Box>
                   <Typography color="textSecondary" gutterBottom>
                     Total Suppliers
@@ -137,7 +141,7 @@ function Dashboard() {
                   <ListItemText
                     primary={item.name}
                     secondary={`Quantity: ${item.quantity} (Threshold: ${item.lowStockThreshold})`}
-                    sx={{ color: 'text.primary' }}
+                    sx={{ color: "text.primary" }}
                   />
                 </ListItem>
               ))}
